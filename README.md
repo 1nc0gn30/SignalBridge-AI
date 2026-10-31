@@ -12,7 +12,6 @@ View your app in AI Studio: https://ai.studio/apps/77fb11c4-c398-4b49-8862-39061
 
 **Prerequisites:**  Node.js
 
-
 1. Install dependencies:
    `npm install`
 2. BYOK mode: add your own Gemini API key in the app settings or key field (stored in browser localStorage).
