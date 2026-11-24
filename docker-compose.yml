@@ -1,0 +1,29 @@
+services:
+  signal-cli:
+    image: bbernhard/signal-cli-rest-api:latest
+    container_name: signalbridge-signal-cli
+    restart: unless-stopped
+    environment:
+      - MODE=json-rpc
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./signal-cli-data:/home/.local/share/signal-cli
+
+  signalbridge:
+    build: .
+    container_name: signalbridge-orchestrator
+    restart: unless-stopped
+    depends_on:
+      - signal-cli
+    env_file:
+      - .env
+    environment:
+      - SIGNAL_BRIDGE_HOST=0.0.0.0
+      - SIGNAL_BRIDGE_PORT=8787
+      - SIGNAL_CLI_URL=http://signal-cli:8080/api/v1/rpc
+      - SIGNAL_LOCAL_ONLY=true
+    ports:
+      - "127.0.0.1:8787:8787"
+    volumes:
+      - ./signalbridge.config.example.json:/app/signalbridge.config.json:ro

@@ -1,46 +1,20 @@
-cat > ~/codex-site-ops/AGENTS.template.md <<'EOF'
 # AGENTS.md
 
-## Project objective
-Finish this site for production deployment on Netlify with minimal safe changes.
+## Repository Overview
+`SignalBridge-AI` is an open-source TypeScript project containing:
+- `src/core/` — Isomorphic routing, E.164/group allowlist, sliding-window rate limiter, SSRF URL guard, input sanitizer, multi-backend adapter formatters (Ollama, OpenAI-compatible, Hermes, HMAC Webhook), and config exporters.
+- `bridge/` — Local Node/Express bridge daemon (`server.ts`), `signal-cli` JSON-RPC client (`signalCli.ts`), config loader (`config.ts`), and CLI (`cli.ts`).
+- `src/` — Browser workbench UI (React 19 + Vite + Tailwind CSS v4) executing `src/core/` client-side.
+- `tests/` — Automated Node test suites (`tsx --test tests/*.test.ts`).
 
-## Platform
-- Frontend: usually React + Vite or static
-- Deployment target: Netlify
-- Preferred domain: subdomain on nealfrazier.tech or 757tech.pro
-- Fallback domain: Netlify subdomain
+## Verification Gates
+Before committing changes, verify all of the following pass with exit code 0:
+1. `npm run lint` (`tsc --noEmit`)
+2. `npm test` (unit + integration tests)
+3. `npm run bridge:validate`
+4. `npm run build` (`vite build`)
 
-## Requirements
-- Build must pass
-- SEO basics must exist
-- Canonical URL must be set
-- robots.txt and sitemap must exist when appropriate
-- og-image.png must exist when appropriate
-- netlify.toml must be correct
-- security headers should be safe and not break the site
-- .gitignore should be production-ready
-
-## Netlify Forms
-If a form should use Netlify Forms, ensure the form is detectable in static HTML at deploy time.
-If the app is client-rendered only, create a hidden static HTML form pattern so Netlify can detect it.
-
-## Functions
-Use Netlify Functions only when needed for security or lightweight backend behavior.
-
-## Supabase
-If the site truly needs Supabase:
-- create a schema SQL file
-- use unique table names
-- document required env vars
-- keep schema minimal
-
-## API strategy
-Prefer user-provided API keys.
-If hosted API support is necessary, add rate limiting and a waitlist CTA when appropriate.
-
-## Change policy
-- prefer minimal changes
-- preserve branding
-- do not redesign unless necessary
-- stop before deploy and summarize changes
-EOF
+## Security Invariants
+- Never commit real API keys, `.env` files, or personal phone numbers.
+- Keep `src/core/` free of Node-only imports so both the browser workbench and Node daemon share identical security logic.
+- Maintain default-deny allowlists and loopback SSRF enforcement (`localOnly: true`) by default.

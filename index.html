@@ -3,34 +3,97 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SignalBridge AI</title>
-      <meta name="description" content="Connect Signal to your local AI agents and backends. Secure, private orchestrator by Tech Pro. Hosted at signalbridge.757tech.pro" />
-    <meta name="author" content="Tech Pro" />
+    <title>SignalBridge AI — Connect Signal to Local AI Agents & Backends</title>
+    <meta
+      name="description"
+      content="Open-source local-first bridge connecting Signal (via signal-cli JSON-RPC) to Ollama, Hermes, OpenAI-compatible servers, and HMAC-signed webhooks with default-deny allowlists and SSRF protection."
+    />
+    <meta name="author" content="Neal Frazier Tech" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#0b0f19" />
+    <meta name="theme-color" content="#060a14" />
     <link rel="canonical" href="https://signalbridge-ai.757tech.pro/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SignalBridge AI" />
-    <meta property="og:title" content="SignalBridge AI" />
-    <meta property="og:description" content="Connect Signal to your local AI agents and backends. Secure, private orchestrator by Tech Pro. Hosted at signalbridge.757tech.pro" />
+    <meta property="og:title" content="SignalBridge AI — Connect Signal to Local AI Agents" />
+    <meta
+      property="og:description"
+      content="Route Signal messages to local Ollama, Hermes, OpenAI-compatible LLMs, and signed webhooks with E.164 allowlists, rate limiting, and loopback SSRF guards."
+    />
     <meta property="og:url" content="https://signalbridge-ai.757tech.pro/" />
     <meta property="og:image" content="https://signalbridge-ai.757tech.pro/og-image.svg" />
-    <meta property="og:image:alt" content="SignalBridge AI preview image" />
+    <meta property="og:image:alt" content="SignalBridge AI local Signal-to-AI orchestrator diagram" />
+
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="SignalBridge AI" />
-    <meta name="twitter:description" content="Connect Signal to your local AI agents and backends. Secure, private orchestrator by Tech Pro. Hosted at signalbridge.757tech.pro" />
+    <meta name="twitter:site" content="@1nc0gn30" />
+    <meta name="twitter:creator" content="@1nc0gn30" />
+    <meta name="twitter:title" content="SignalBridge AI — Connect Signal to Local AI Agents" />
+    <meta
+      name="twitter:description"
+      content="Open-source Signal-to-AI router with dry-run simulator, allowlists, rate limiting, and SSRF protection."
+    />
     <meta name="twitter:image" content="https://signalbridge-ai.757tech.pro/og-image.svg" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "SignalBridge AI",
+            "url": "https://signalbridge-ai.757tech.pro/",
+            "codeRepository": "https://github.com/1nc0gn30/SignalBridge-AI",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Linux, macOS, Windows, Web",
+            "license": "https://opensource.org/licenses/MIT",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "creator": {
+              "@type": "Organization",
+              "name": "Neal Frazier Tech",
+              "url": "https://nullai.tech"
+            },
+            "description": "Local-first open-source orchestrator connecting Signal messaging via signal-cli to Ollama, Hermes, OpenAI-compatible endpoints, and HMAC-signed webhooks."
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How does SignalBridge AI connect Signal to local AI backends?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "SignalBridge AI connects to a local signal-cli JSON-RPC daemon, enforces an E.164 phone and group allowlist, applies sliding-window rate limits and SSRF checks, and formats prompts for Ollama, Hermes, OpenAI-compatible APIs, or HMAC-signed webhooks."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does SignalBridge AI store or transmit Signal messages to a cloud server?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Decryption happens locally in your signal-cli instance, localOnly SSRF mode restricts backend dispatch to loopback addresses by default, and the browser workbench runs 100% client-side."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I test routing without installing signal-cli first?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Both the browser workbench and the CLI (npm run bridge:sim or npm run bridge:dry-run) run in dry-run simulator mode so you can verify allowlists, rate limits, sanitization, and adapter payloads locally."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <!-- Netlify Form Detection -->
-    <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
-      <input type="hidden" name="form-name" value="waitlist" />
-      <input type="email" name="email" />
-      <input type="text" name="bot-field" />
-    </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
